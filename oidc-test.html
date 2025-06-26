@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>OIDC Test</title>
-</head>
-<body>
-  <h1>OIDC Redirect Receiver</h1>
-  <pre id="output"></pre>
+  <head>
+    <title>OIDC Redirect Receiver</title>
+  </head>
+  <body>
+    <h1>OIDC Test</h1>
+    <pre id="output">Waiting for response...</pre>
 
-  <script>
-    function parseTokenFromUrl() {
+    <script>
       const hash = window.location.hash.substring(1);
       const params = new URLSearchParams(hash);
-      const idToken = params.get("id_token");
-      if (idToken) {
-        document.getElementById("output").innerText = `ID Token:\n\n${idToken}`;
-      } else {
-        document.getElementById("output").innerText = "No id_token found.";
-      }
-    }
+      const idToken = params.get('id_token');
+      const nonce = params.get('nonce');
 
-    window.onload = parseTokenFromUrl;
-  </script>
-</body>
+      const output = document.getElementById("output");
+
+      if (idToken) {
+        output.textContent = `✅ Token received:\n\n${idToken}`;
+      } else {
+        output.textContent = "❌ No token received.";
+      }
+    </script>
+  </body>
 </html>
