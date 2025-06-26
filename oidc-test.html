@@ -1,17 +1,26 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>OIDC Redirect Receiver</title>
+  <meta charset="UTF-8">
+  <title>OIDC Test</title>
 </head>
 <body>
-    <h1>OIDC Token Received</h1>
-    <pre id="output">Parsing token from URL...</pre>
-    <script>
-        const output = document.getElementById("output");
-        const hash = window.location.hash || window.location.search;
-        output.textContent = decodeURIComponent(hash);
-    </script>
+  <h1>OIDC Redirect Receiver</h1>
+  <pre id="output"></pre>
+
+  <script>
+    function parseTokenFromUrl() {
+      const hash = window.location.hash.substring(1);
+      const params = new URLSearchParams(hash);
+      const idToken = params.get("id_token");
+      if (idToken) {
+        document.getElementById("output").innerText = `ID Token:\n\n${idToken}`;
+      } else {
+        document.getElementById("output").innerText = "No id_token found.";
+      }
+    }
+
+    window.onload = parseTokenFromUrl;
+  </script>
 </body>
 </html>
