@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OIDC Redirect Receiver</title>
+</head>
+<body>
+    <h1>OIDC Token Received</h1>
+    <pre id="output">Parsing token from URL...</pre>
+    <script>
+        const output = document.getElementById("output");
+        const hash = window.location.hash || window.location.search;
+        output.textContent = decodeURIComponent(hash);
+    </script>
+</body>
+</html>
